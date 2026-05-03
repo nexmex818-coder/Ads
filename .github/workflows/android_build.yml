@@ -30,7 +30,7 @@ jobs:
           # إضافة المنصة
           cordova platform add android@12.0.0
           
-          # تثبيت الإضافة مباشرة من رابط GitHub لتجنب أخطاء npm registry
+          # تحميل الإضافة مباشرة من GitHub لتجنب خطأ الإصدارات في npm
           cordova plugin add https://github.com/nexage/cordova-plugin-unityads.git --save
           
           # قبول رخص أندرويد
@@ -38,7 +38,8 @@ jobs:
 
       - name: Build Android APK
         run: |
-          cordova build android --release --device
+          # البناء بصيغة APK جاهزة للتثبيت
+          cordova build android --release --device -- --packageType=apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
