@@ -27,12 +27,11 @@ jobs:
 
       - name: Prepare Project and Plugins
         run: |
-          # إضافة المنصة أولاً
+          # إضافة المنصة
           cordova platform add android@12.0.0
           
-          # تثبيت الإضافة بدون تحديد رقم إصدار وبإستخدام --legacy-peer-deps لحل التعارضات
-          npm install cordova-plugin-unityads --save-dev --legacy-peer-deps
-          cordova plugin add cordova-plugin-unityads
+          # تثبيت الإضافة مباشرة من رابط GitHub لتجنب أخطاء npm registry
+          cordova plugin add https://github.com/nexage/cordova-plugin-unityads.git --save
           
           # قبول رخص أندرويد
           echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
@@ -44,5 +43,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Pulse-Yemen-With-Ads
+          name: Pulse-Yemen-Final
           path: platforms/android/app/build/outputs/apk/release/*.apk
