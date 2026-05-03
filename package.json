@@ -1,0 +1,14 @@
+{
+  "name": "com.pulse.yemen.newapp",
+  "displayName": "PulseYemenNew",
+  "version": "1.0.0",
+  "description": "New Test App",
+  "devDependencies": {
+    "cordova-android": "^12.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  }
+}
