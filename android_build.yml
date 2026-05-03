@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.pulse.yemen.newapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets">
+    <name>Pulse Yemen New</name>
+    <description>تطبيق تجريبي جديد</description>
+    <content src="index.html" />
+    <access origin="*" />
+    <platform name="android">
+        <preference name="android-minSdkVersion" value="22" />
+        <preference name="android-targetSdkVersion" value="33" />
+    </platform>
+</widget>
