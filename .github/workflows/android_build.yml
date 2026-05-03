@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: '20'
 
-      # هذه الخطوة ستحل مشكلة الـ Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -31,10 +30,16 @@ jobs:
       - name: Install Cordova
         run: npm install -g cordova
 
+      # خطوة مهمة جداً لقبول الرخص وتثبيت المكونات الناقصة
+      - name: Install Android SDK Components
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platforms;android-33" "build-tools;33.0.2"
+
       - name: Build Android
         run: |
-          cordova platform add android@12.0.0
-          cordova build android --release
+          cordova platform add android@12.0.0 --non-interactive
+          cordova build android --release --device -- --packageType=apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
