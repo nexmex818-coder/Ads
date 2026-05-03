@@ -27,9 +27,12 @@ jobs:
 
       - name: Prepare Project and Plugins
         run: |
-          # إضافة المنصة وإضافة Unity Ads يدوياً لضمان تثبيتها
+          # إضافة المنصة أولاً
           cordova platform add android@12.0.0
-          cordova plugin add cordova-plugin-unityads@1.0.0
+          
+          # تثبيت الإضافة بدون تحديد رقم إصدار وبإستخدام --legacy-peer-deps لحل التعارضات
+          npm install cordova-plugin-unityads --save-dev --legacy-peer-deps
+          cordova plugin add cordova-plugin-unityads
           
           # قبول رخص أندرويد
           echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
