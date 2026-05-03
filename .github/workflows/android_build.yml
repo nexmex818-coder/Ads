@@ -25,15 +25,21 @@ jobs:
       - name: Install Cordova
         run: npm install -g cordova
 
-      - name: Prepare and Build
+      - name: Prepare Project and Plugins
         run: |
-          # قبول الرخص بطريقة متوافقة مع المسارات الافتراضية
-          echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          # إضافة المنصة وإضافة Unity Ads يدوياً لضمان تثبيتها
           cordova platform add android@12.0.0
+          cordova plugin add cordova-plugin-unityads@1.0.0
+          
+          # قبول رخص أندرويد
+          echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Build Android APK
+        run: |
           cordova build android --release --device
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Pulse-Yemen-Release
+          name: Pulse-Yemen-With-Ads
           path: platforms/android/app/build/outputs/apk/release/*.apk
