@@ -10,18 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
+        # تم التحديث إلى v4 (وهي تدعم الإصدارات الأحدث)
         uses: actions/checkout@v4
 
       - name: Setup Java JDK
-        uses: actions/setup-java@v3
+        # تم التحديث إلى v4 بدلاً من v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        # تم التحديث إلى v4 بدلاً من v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20' # يمكنك استخدام 20 أو 22 هنا
 
       - name: Install Cordova
         run: npm install -g cordova
