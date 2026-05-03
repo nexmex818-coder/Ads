@@ -1,8 +1,7 @@
 name: Build Android APK
 on: 
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -10,28 +9,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
-        # تم التحديث إلى v4 (وهي تدعم الإصدارات الأحدث)
         uses: actions/checkout@v4
 
       - name: Setup Java JDK
-        # تم التحديث إلى v4 بدلاً من v3
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Setup Node.js
-        # تم التحديث إلى v4 بدلاً من v3
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # يمكنك استخدام 20 أو 22 هنا
+          node-version: '20'
+
+      # هذه الخطوة ستحل مشكلة الـ Gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
 
       - name: Install Cordova
         run: npm install -g cordova
 
       - name: Build Android
         run: |
-          cordova platform add android
+          cordova platform add android@12.0.0
           cordova build android --release
 
       - name: Upload APK
